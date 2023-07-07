@@ -1,0 +1,19 @@
+.element__Repo{
+  padding: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  background-color: bisque;
+  padding: 10px;
+  margin: 0 0 10px 0;
+}
+.repo_elem__l,
+.repo_elem__r{
+  width: 50%;
+}
+.repo_elem__r{
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+
+}

@@ -1,64 +1,58 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import { useState } from 'react';
+import Search from "../components/Search";
+import UserList from "../components/UserList";
+// import useDebounce from "../hooks/useDebounce";
+// import React, { useState, useEffect } from 'react';
+
 
 export default function Home() {
+
+
+  const [uservalue, setUsersList] = useState([]);
+  // const [searchvalue, setUsersValue] = useState('');
+  // const debouncedSearch = useDebounce(createPosts, 500)
+
+  async function createPosts(url_path = ''){
+    try{
+      const res = await fetch("https://api.github.com/search/users?q="+ url_path +"");
+      let resUsers = await res.json();
+      console.log(resUsers.items)
+
+      if (!Array.isArray(resUsers.items)) throw Error('Response from server is not array') 
+      
+      setUsersList(resUsers.items);
+    } catch (e){
+      setUsersList([]);
+      console.log("error", e.message)
+    }
+  };
+
+
+  // function handleSearch(e) {
+  //   let searchUsers =  e.target.value;
+  //   setUsersValue(searchUsers);
+  //   debouncedSearch(searchUsers);
+  // }
+  
+
+
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="wrapper">
+      <div className="header">header</div>
 
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <main className='main'>
+          <div  className=" search-title">GitHub Searcher</div>  
+          {/* <input type="text" className='search-user'  name="searchfield"  onChange={handleSearch}  value={searchvalue} /> */}
+          <Search  create ={createPosts} />
+          {/* {console.log(uservalue.length)} */}
+          {uservalue.length > 0 
+            ?  <UserList users = {uservalue}  usertitle = 'Users list' />
+            : 'not found'
+          }
+        </main>
 
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
-      </footer>
+        <footer className="footer">footer</footer>
 
       <style jsx>{`
         main {
@@ -69,31 +63,36 @@ export default function Home() {
           justify-content: center;
           align-items: center;
         }
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
+        .wrapper {
           display: flex;
-          justify-content: center;
-          align-items: center;
+          flex-direction: column;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: normal;
+          align-content: normal;
+          min-height: 100vh;
+          color: #000;
         }
-        footer img {
-          margin-left: 0.5rem;
+        .main{
+          flex-grow: 1;
+          flex-shrink: 1;
         }
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-decoration: none;
-          color: inherit;
+        .search-title{
+          padding: 50px;
+          text-align: center;
+          color: #000;
+          font-size: 22px;
+          font-weight: 700;
         }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+
+        .header,
+        .footer{
+          background-color: brown;
+          padding: 20px;
+          text-align: center;
+          color: #000;
+          font-size: 18px;
+          font-weight: 700;
         }
       `}</style>
 
