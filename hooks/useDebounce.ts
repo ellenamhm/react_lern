@@ -4,7 +4,7 @@ export default function useDebounce(callback, delay) {
     const timer = useRef();
 
 
-    const debouncedCallback = useCallback((...args) => {
+    const debouncedCallback = useCallback((...args: any) => {
         if (timer.current) {
             clearTimeout(timer.current)
         }

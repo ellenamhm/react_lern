@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Search from "../components/Search";
-import UserList from "../components/UserList";
+import Search from "components/Search";
+import UserList from "components/UserList";
 // import useDebounce from "../hooks/useDebounce";
 // import React, { useState, useEffect } from 'react';
 
@@ -41,8 +41,7 @@ export default function Home() {
     <div className="wrapper">
       <div className="header">header</div>
 
-        <main className='main'>
-          <div  className=" search-title">GitHub Searcher</div>  
+        <main className='main'><div  className=" search-title">GitHub Searcher</div>  
           {/* <input type="text" className='search-user'  name="searchfield"  onChange={handleSearch}  value={searchvalue} /> */}
           <Search  create ={createPosts} />
           {/* {console.log(uservalue.length)} */}

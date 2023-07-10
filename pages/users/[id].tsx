@@ -1,4 +1,3 @@
-//import { useRouter } from "next/router";
 import { useState , useEffect} from 'react';
 import styles from '../../styles/user.module.css'
 import UserRepo from "../../components/UserRepo";
