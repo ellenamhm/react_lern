@@ -1,5 +1,8 @@
 module.exports = {
+  images: {
+    domains: ['avatars.githubusercontent.com'],
+  },
   trailingSlash: true,
-  reactStrictMode: true,
-  inlineImageLimit: false,
+  reactStrictMode: false,
+  // inlineImageLimit: false,
 };

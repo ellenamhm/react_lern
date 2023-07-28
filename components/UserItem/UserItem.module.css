@@ -1,0 +1,12 @@
+.element__User {
+    margin: 0px 0;
+    border-top: 1px solid #ccc ;
+    padding: 10px 10px;
+}
+.element__User:first-child {
+  border: none;
+}
+  @media (max-width: 600px) {
+  
+  }
+  
